@@ -8,7 +8,7 @@ namespace Gatherly.Domain.Entities;
 
 public class Gathering
 {
-    public Gathering(Guid id, Member creator, GatheringType type, DateTime scheduledAtUtc, string name, string? location)
+    private Gathering(Guid id, Member creator, GatheringType type, DateTime scheduledAtUtc, string name, string? location)
     {
         Id = id;
         Creator = creator;
@@ -23,8 +23,8 @@ public class Gathering
     public string Name { get; private set; }
     public DateTime ScheduledAtUtc { get; private set; }
     public string? Location { get; private set; }
-    public int? MaximumNumberOfAttendees { get; set; }
-    public DateTime? InvitationsExpireAtUtc { get; set; }
+    public int? MaximumNumberOfAttendees { get; private set; }
+    public DateTime? InvitationsExpireAtUtc { get; private set; }
     public int NumberOfAttendees { get; set; }
     public List<Attendee> Attendees { get; set; }
     public List<Invitation> Invitations { get; set; }
@@ -59,11 +59,20 @@ public class Gathering
                 }
 
                 gathering.InvitationsExpireAtUtc =
-                    gathering.ScheduleAtUtc.AddHours(-invitationsValidBeforeInHours.Value);
+                    gathering.ScheduledAtUtc.AddHours(-invitationsValidBeforeInHours.Value);
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(GatheringType));
         }
         return gathering;
+    }
+
+    public Invitation SendInvitation(Member member)
+    {
+        var invitation = new Invitation(Guid.NewGuid(), member, this);
+
+        Invitations.Add(invitation);
+
+        return invitation;
     }
 }

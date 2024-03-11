@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Gatherly.Domain.Entities;
 
-namespace Gatherly.Domain.Repositories
+namespace Gatherly.Domain.Repositories;
+
+public interface IMemberRepository
 {
-    public interface IMemberRepository
-    {
-
-    }
+    public Task<Member> GetByIdAsync(Guid id, CancellationToken cancellationToken);
 }
-
-
-

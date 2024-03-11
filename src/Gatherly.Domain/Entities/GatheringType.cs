@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gatherly.Domain.Entities
+namespace Gatherly.Domain.Entities;
+
+public enum GatheringType
 {
-    public class GatheringType
-    {
+    WithFixedNumberOfAttendees,
+    WithExpirationForInvitations
 
-    }
 }
-
-
-

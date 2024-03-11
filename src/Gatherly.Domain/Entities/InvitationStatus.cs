@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Gatherly.Domain.Entities;
 
-public class Member
+public enum InvitationStatus
 {
-    public Guid Id { get; set; }
+    Pending
 }
