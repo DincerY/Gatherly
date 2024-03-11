@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Gatherly.Domain.Entities;
+﻿namespace Gatherly.Domain.Entities;
 
 public class Invitation
 {
@@ -24,5 +18,20 @@ public class Invitation
     public DateTime CreateOnUtc { get; private set; }
     public DateTime? ModifiedOnUtc { get; private set; }
 
+
+    internal void Expire()
+    {
+        Status = InvitationStatus.Expired;
+        ModifiedOnUtc = DateTime.UtcNow;
+    }
+
+    internal Attendee Accept()
+    {
+        Status = InvitationStatus.Accepted;
+        ModifiedOnUtc = DateTime.UtcNow;
+
+        var attendee = new Attendee(this);
+        return attendee;
+    }
 
 }

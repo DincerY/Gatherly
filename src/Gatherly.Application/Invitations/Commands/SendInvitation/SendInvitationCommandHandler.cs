@@ -39,19 +39,8 @@ public sealed class SendInvitationCommandHandler : IRequestHandler<SendInvitatio
             return Unit.Value;
         }
 
-        if (gathering.Creator.Id == member.Id)
-        {
-            throw new Exception("Can t send invitation to the gathering creator");
-        }
 
-        if (gathering.ScheduledAtUtc < DateTime.UtcNow)
-        {
-            throw new Exception("Can t send invitation for gathering in the past");
-        }
-
-        gathering.SendInvitation(member);
-
-        gathering.Invitations.Add(invitation);
+        var invitation = gathering.SendInvitation(member);
 
         _invitationRepository.Add(invitation);
 

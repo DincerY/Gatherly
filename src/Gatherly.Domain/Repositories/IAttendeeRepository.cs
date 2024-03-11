@@ -7,9 +7,7 @@ using Gatherly.Domain.Entities;
 
 namespace Gatherly.Domain.Repositories;
 
-public interface IInvitationRepository
+public interface IAttendeeRepository
 {
-    public void Add(Invitation invitation);
-
-    public Task<Invitation> GetByIdAsync(Guid invitationId, CancellationToken cancellationToken);
+    public void Add(Attendee attendee);
 }

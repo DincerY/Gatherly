@@ -8,5 +8,7 @@ namespace Gatherly.Domain.Entities;
 
 public enum InvitationStatus
 {
-    Pending
+    Pending,
+    Expired,
+    Accepted
 }
