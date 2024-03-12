@@ -11,5 +11,5 @@ public interface IInvitationRepository
 {
     public void Add(Invitation invitation);
 
-    public Task<Invitation> GetByIdAsync(Guid invitationId, CancellationToken cancellationToken);
+    //public Task<Invitation> GetByIdAsync(Guid invitationId, CancellationToken cancellationToken);
 }

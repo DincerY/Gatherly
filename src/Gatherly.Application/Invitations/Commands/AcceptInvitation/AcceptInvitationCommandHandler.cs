@@ -26,18 +26,17 @@ public class AcceptInvitationCommandHandler : IRequestHandler<AcceptInvitationCo
 
     public async Task<Unit> Handle(AcceptInvitationCommand request, CancellationToken cancellationToken)
     {
-        var invitation = await _invitationRepository.GetByIdAsync(request.InvitationId, cancellationToken);
+        //var gathering = await _gatheringRepository.GetByIdWithCreatorAsync(invitation.GatheringId, cancellationToken);
+        var gathering = await _gatheringRepository.GetByIdWithCreatorAsync(request.GatheringId, cancellationToken);
 
-        if (invitation is null || invitation.Status != InvitationStatus.Pending)
+        if (gathering is null)
         {
             return Unit.Value;
         }
 
-        var member = await _memberRepository.GetByIdAsync(invitation.MemberId, cancellationToken);
+        var invitation = gathering.Invitations.FirstOrDefault(i => i.Id == request.InvitationId);  
 
-        var gathering = await _gatheringRepository.GetByIdWithCreatorAsync(invitation.GatheringId, cancellationToken);
-
-        if (member is null || gathering is null)
+        if (invitation is null || invitation.Status != InvitationStatus.Pending)
         {
             return Unit.Value;
         }

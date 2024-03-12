@@ -2,7 +2,7 @@
 
 namespace Gatherly.Domain.Entities;
 
-public class Gathering : Entity
+public class Gathering : AggregateRoot
 {
     private readonly List<Invitation> _invitations = new();
     private readonly List<Attendee> _attendees = new();
