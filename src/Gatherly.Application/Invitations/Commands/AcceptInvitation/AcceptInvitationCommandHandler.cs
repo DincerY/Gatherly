@@ -49,8 +49,7 @@ public class AcceptInvitationCommandHandler : IRequestHandler<AcceptInvitationCo
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        if (invitation.Status == InvitationStatus.Accepted) 
-            await _emailService.SendInvitationSentEmailAsync(gathering.Creator, gathering, cancellationToken);
+       
 
         return Unit.Value;
     }

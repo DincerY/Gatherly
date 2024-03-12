@@ -1,4 +1,5 @@
-﻿using Gatherly.Domain.Primitives;
+﻿using Gatherly.Domain.DomainEvents;
+using Gatherly.Domain.Primitives;
 
 namespace Gatherly.Domain.Entities;
 
@@ -97,6 +98,8 @@ public class Gathering : AggregateRoot
         }
 
         var attendee = invitation.Accept();
+
+        RaiseDomainEvent(new InvitationAcceptedDomainEvent(invitation.Id, Id));
 
         _attendees.Add(attendee);
         NumberOfAttendees++;
