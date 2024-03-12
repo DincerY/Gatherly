@@ -1,4 +1,4 @@
-﻿namespace ClassLibrary1
+﻿namespace AnemicDomainModel
 {
     public class Class1
     {

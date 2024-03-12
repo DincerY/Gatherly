@@ -1,20 +1,21 @@
-﻿namespace Gatherly.Domain.Entities;
+﻿using Gatherly.Domain.Primitives;
 
-public class Gathering
+namespace Gatherly.Domain.Entities;
+
+public class Gathering : Entity
 {
     private readonly List<Invitation> _invitations = new();
     private readonly List<Attendee> _attendees = new();
     
-    private Gathering(Guid id, Member creator, GatheringType type, DateTime scheduledAtUtc, string name, string? location)
+    private Gathering(Guid id, Member creator, GatheringType type, DateTime scheduledAtUtc, string name, string? location) : base(id)
     {
-        Id = id;
+
         Creator = creator;
         Type = type;
         ScheduledAtUtc = scheduledAtUtc;
         Name = name;
         Location = location;
     }
-    public Guid Id { get; private set; }
     public Member Creator { get; private set; }
     public GatheringType Type { get; private set; }
     public string Name { get; private set; }
